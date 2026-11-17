@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 4c - Question 2</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <h2>Book Details</h2>
+  <p id="firstTitle"></p>
+  <p id="secondAuthor"></p>
+  <ul id="genreList"></ul>
+
+  <script>
+    // Load books.json, then show the details in the Console and on the page
+    $.getJSON("books.json", function (data) {
+      let books = data.books;
+
+      // (a) Title of the first book
+      console.log("Title of the first book: " + books[0].title);
+      $("#firstTitle").text("(a) Title of the first book: " + books[0].title);
+
+      // (b) Author of the second book
+      console.log("Author of the second book: " + books[1].author);
+      $("#secondAuthor").text("(b) Author of the second book: " + books[1].author);
+
+      // (c) Genres of all books
+      console.log("Genres of all books:");
+      $("#genreList").before("<p>(c) Genres of all books:</p>");
+      $.each(books, function (index, book) {
+        console.log(book.title + ": " + book.genres.join(", "));
+        $("#genreList").append("<li>" + book.title + ": " + book.genres.join(", ") + "</li>");
+      });
+    });
+  </script>
+</body>
+</html>
